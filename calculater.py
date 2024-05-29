@@ -9,7 +9,7 @@ def menu():
     print("Welcome to my calculator")
 
     #Creating a menu
-    menuOptions = ["Multiply", "Divide", "Subtraction", "Addition", "Square root", "Elevate", "Percentage", "Pythagorean Theorem", "8", "Exit"]
+    menuOptions = ["Multiply", "Divide", "Subtraction", "Addition", "Square root", "Elevate", "Percentage", "Pythagorean Theorem", "Bank investment", "Exit"]
     menuSelected = 0
     end_program = False
 
@@ -26,7 +26,6 @@ def menu():
             print(menuOptions[5])
             print(menuOptions[6])
             print(menuOptions[7])
-            print(menuOptions[7])
             print(menuOptions[8])
             print(menuOptions[9])
         
@@ -38,7 +37,6 @@ def menu():
             print(menuOptions[4])
             print(menuOptions[5])
             print(menuOptions[6])
-            print(menuOptions[7])
             print(menuOptions[7])
             print(menuOptions[8])
             print(menuOptions[9])
@@ -168,10 +166,8 @@ def menu():
             elif menuSelected == 7:
                 pythagorean_theorem(menu)
             elif menuSelected == 8:
-                #FUNCTION
-                print("9")
+                bank_calc(menu)
             elif menuSelected == 9:
-                #FUNCTION AVSLUTA PROGRAM
                 print("9")
                 end_program = True
                 clear()
@@ -342,10 +338,41 @@ def pythagorean_theorem(prev_func):
         input("Press Enter to try again")
         return(pythagorean_theorem(prev_func))
     
-    convert_1st = get_1st_py ** 2
-    convert_2nd = get_2nd_py ** 2
+    convert_1st = get_1st_py ** 2 + get_2nd_py ** 2
+    convert_2nd = math.sqrt(convert_1st)
 
+
+    clear()
+    print("You entered: ", get_1st_py, " and: ", get_2nd_py)
+    print("\nPythagorean result: ", convert_2nd, "^2")
+    print("\nResult round off: ", math.floor(convert_2nd), "^2")
+    input("Press Enter")
+    options(pythagorean_theorem, prev_func)
+
+def bank_calc(prev_func):
+
+    clear()
+    print("Investment plan: Here you are able to take a monthly savings and multiply with the percentage and years you want to invest")
+
+    try:
+        get_money = float(input("Money: "))
+        get_percentage = float(input("Percentage: "))
+        get_years = float(input("Years: "))
+    except ValueError:
+        clear()
+        print("Invalid input. Please enter numeric values.")
+        input("Press Enter to try again")
+        return(bank_calc(prev_func))
     
+    add_num = get_percentage / 100 + 1
+    calc_m_yr = get_money * get_years
+    calc_all = math.floor(calc_m_yr * add_num)
+
+    clear()
+    print("You entered Money; ", get_money, " Years: ", get_years, " Percentage: ", math.floor(get_percentage),"%")
+    print("\nYou will have: ", calc_all)
+    input("Press Enter")
+    options(bank_calc, prev_func)
 
 
 
@@ -369,7 +396,7 @@ def options(prev_func, menu_func):
         prev_func(menu_func)
     elif choice == "N" or choice == "n":
         clear()
-        print("Exiting")
+        print("Exiting...")
         time.sleep(1)
         back(menu_func)
     elif choice != "N" or choice != "n" or choice != "Y" or choice != "y":
