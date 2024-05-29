@@ -4,6 +4,8 @@ import math
 from getkey import getkey, keys
 clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
+## Menus
+
 def menu():
     print("Welcome to my calculator")
     menuOptions = ["Multiply", "Divide", "Subtraction", "Addition", "Square root", "Elevate", "Percentage", "Pythagorean Theorem", "Bank investment", "Exit"]
@@ -56,6 +58,7 @@ def get_input(prompt):
             print("Invalid input. Please enter a numeric value.")
 
 
+## Functions for calculator
 
 def multiply(prev_func):
     clear()
@@ -253,11 +256,6 @@ def bank_calc(prev_func):
     print("\nYou will have: ", calc_all)
     input("Press Enter")
     options(bank_calc, prev_func)
-
-
-
-
-
 
 
 
