@@ -1,154 +1,29 @@
 import os
 import time
 import math
-clear = lambda: os.system('cls')
 from getkey import getkey, keys
+clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu():
-
     print("Welcome to my calculator")
-
-    #Creating a menu
     menuOptions = ["Multiply", "Divide", "Subtraction", "Addition", "Square root", "Elevate", "Percentage", "Pythagorean Theorem", "Bank investment", "Exit"]
     menuSelected = 0
     end_program = False
 
     while not end_program:
-        print('\x1b[?25l')
         clear()
-
-        if menuSelected == 0:
-            print("\t[ " + menuOptions[0] + " ]" + "\t<--")
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
+        for i, option in enumerate(menuOptions):
+            if i == menuSelected:
+                print(f"\t[ {option} ]\t<--")
+            else:
+                print(option)
         
-        elif menuSelected == 1:
-            print(menuOptions[0])
-            print("\t[ " + menuOptions[1] + " ]" + "\t<--")
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-        elif menuSelected == 2:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print("\t[ " + menuOptions[2] + " ]" + "\t<--")
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-
-        elif menuSelected == 3:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print("\t[ " + menuOptions[3] + " ]" + "\t<--")
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-
-        elif menuSelected == 4:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print("\t[ " + menuOptions[4] + " ]" + "\t<--")
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-
-        elif menuSelected == 5:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print("\t[ " + menuOptions[5] + " ]" + "\t<--")
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-
-        elif menuSelected == 6:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print("\t[ " + menuOptions[6] + " ]" + "\t<--")
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-
-        elif menuSelected == 7:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print("\t[ " + menuOptions[7] + " ]" + "\t<--")
-            print(menuOptions[8])
-            print(menuOptions[9])
-
-        elif menuSelected == 8:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print("\t[ " + menuOptions[8] + " ]" + "\t<--")
-            print(menuOptions[9])
-
-        elif menuSelected == 9:
-            print(menuOptions[0])
-            print(menuOptions[1])
-            print(menuOptions[2])
-            print(menuOptions[3])
-            print(menuOptions[4])
-            print(menuOptions[5])
-            print(menuOptions[6])
-            print(menuOptions[7])
-            print(menuOptions[8])
-            print("\t[ " + menuOptions[9] + " ]" + "\t<--")
-
         keyPressed = getkey()
-
         if keyPressed == keys.DOWN and menuSelected + 1 != len(menuOptions):
             menuSelected += 1
         elif keyPressed == keys.UP and menuSelected >= 1:
             menuSelected -= 1
-        elif keyPressed == keys.ENTER:
+        elif keyPressed == keys.ENTER or keyPressed == '\r' or keyPressed == '\n':
             if menuSelected == 0:
                 multiply(menu)
             elif menuSelected == 1:
@@ -168,12 +43,17 @@ def menu():
             elif menuSelected == 8:
                 bank_calc(menu)
             elif menuSelected == 9:
-                print("9")
                 end_program = True
                 clear()
                 print("Thank you for using the calculator!")
                 input("Press Enter to exit!")
-                print('\x1b[?25h')
+
+def get_input(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
 
 
 
