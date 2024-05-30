@@ -248,8 +248,8 @@ def bank_calc(prev_func):
         return(bank_calc(prev_func))
     
     add_num = get_percentage / 100 + 1
-    calc_m_yr = get_money * add_num ** get_years
-    calc_all = math.floor(calc_m_yr * add_num)
+    #calc_m_yr = get_money * add_num ** get_years
+    calc_all = math.floor(get_money * add_num ** get_years)
 
     clear()
     print("You entered Money; ", get_money, " Years: ", get_years, " Percentage: ", math.floor(get_percentage),"%")
